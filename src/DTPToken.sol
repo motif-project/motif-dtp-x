@@ -15,15 +15,21 @@ contract DTPToken is
     OwnableUpgradeable 
 {
     address public operator;
-    address public bitcoinPodManager;
-    
+    address public dtpFactory;
+    uint256 public currentSupply;
+
+    // Array to store assigned pod addresses
+    address[] public assignedPods;
+    // Mapping to efficiently check if a pod is assigned
+    mapping(address => bool) public isPodAssigned;
+
     modifier onlyOperator() {
         require(msg.sender == operator, "Only operator can call");
         _;
     }
 
-    modifier onlyPodManager() {
-        require(msg.sender == bitcoinPodManager, "Only pod manager can call");
+    modifier onlyDtpFactory() {
+        require(msg.sender == dtpFactory, "Only DTP factory can call");
         _;
     }
 
@@ -32,20 +38,66 @@ contract DTPToken is
         string memory symbol,
         address owner,
         address _operator,
-        address _bitcoinPodManager
+        address _dtpFactory
     ) external initializer {
         __ERC20_init(name, symbol);
         __Ownable_init(msg.sender);
         transferOwnership(owner);
         operator = _operator;
-        bitcoinPodManager = _bitcoinPodManager;
+        dtpFactory = _dtpFactory;
     }
 
-    function mint(address to, uint256 amount) external onlyPodManager {
+    function mint(address to, uint256 amount) external onlyDtpFactory {
         _mint(to, amount);
+        currentSupply += amount;
     }
 
-    function burn(address from, uint256 amount) external onlyPodManager {
+    function burn(address from, uint256 amount) external onlyDtpFactory {
         _burn(from, amount);
+        currentSupply -= amount;
+    }
+
+    /**
+     * @notice Assigns a pod to this DTP token
+     * @param pod Address of the pod to assign
+     */
+    function assignPod(address pod) external onlyDtpFactory {
+        require(!isPodAssigned[pod], "Pod already assigned");
+        isPodAssigned[pod] = true;
+        assignedPods.push(pod);
+    }
+
+    /**
+     * @notice Removes a pod assignment from this DTP token
+     * @param pod Address of the pod to unassign
+     */
+    function unassignPod(address pod) external onlyDtpFactory {
+        require(isPodAssigned[pod], "Pod not assigned");
+        isPodAssigned[pod] = false;
+        
+        // Remove pod from array
+        for (uint256 i = 0; i < assignedPods.length; i++) {
+            if (assignedPods[i] == pod) {
+                assignedPods[i] = assignedPods[assignedPods.length - 1];
+                assignedPods.pop();
+                break;
+            }
+        }
+    }
+
+    /**
+     * @notice Returns all pods assigned to this DTP token
+     * @return Array of pod addresses
+     */
+    function getAssignedPods() external view returns (address[] memory) {
+        return assignedPods;
+    }
+
+    function getCurrentSupply() external view returns (uint256) {
+        return currentSupply;
+    }
+    function isPodAssignedToDtp(address pod) external view returns (bool) {
+        return isPodAssigned[pod];
     }
 } 
+

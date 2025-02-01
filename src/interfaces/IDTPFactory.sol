@@ -8,4 +8,13 @@ interface IDTPFactory {
         string memory imageUri,
         address operator
     ) external returns (address);
+
+    function isValidSignature(
+        bytes32 _hash,
+        bytes memory _signature
+    ) external view returns (bytes4);
+
+    function updateAppMetadataURI(
+        string calldata metadataURI
+    ) external;
 } 
