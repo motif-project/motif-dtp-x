@@ -87,7 +87,7 @@ contract DTPFactory is
             symbol,
             msg.sender,
             operator,
-            address(bitcoinPodManager)
+            address(this)
         );
 
         // Register DTP in registry

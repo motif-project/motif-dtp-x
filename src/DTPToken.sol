@@ -47,14 +47,18 @@ contract DTPToken is
         dtpFactory = _dtpFactory;
     }
 
-    function mint(address to, uint256 amount) external onlyDtpFactory {
-        _mint(to, amount);
-        currentSupply += amount;
+    function mint(address to, uint256 satAmount) external onlyDtpFactory {
+        // convert sat in 10^8 to erc20 in 10^18
+        uint256 erc20Amount = satAmount * 10 ** 10;
+        _mint(to, erc20Amount);
+        currentSupply += erc20Amount;
     }
 
-    function burn(address from, uint256 amount) external onlyDtpFactory {
-        _burn(from, amount);
-        currentSupply -= amount;
+    function burn(address from, uint256 satAmount) external onlyDtpFactory {
+        // convert sat in 10^8 to erc20 in 10^18
+        uint256 erc20Amount = satAmount * 10 ** 10;
+        _burn(from, erc20Amount);
+        currentSupply -= erc20Amount;
     }
 
     /**
