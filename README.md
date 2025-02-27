@@ -1,6 +1,6 @@
 # motif-dtp-x
 
-motif-dtp-x is an experimental sandbox for exploring and prototyping Delegated Traded Positions (DTP) issuance designs for the Motif protocol. This repository serves as a space to conceptualize, test, and iterate on innovative mechanisms for creating and managing DTPs, leveraging Bitcoin-backed security through Bitcoin Pods and the EigenLayer AVS architecture.
+**motif-dtp-x** is an experimental sandbox for exploring and prototyping Delegated Traded Positions (DTP) issuance designs for the Motif protocol. This repository serves as a space to conceptualize, test, and iterate on innovative mechanisms for creating and managing DTPs, leveraging Bitcoin-backed security through Bitcoin Pods and the EigenLayer AVS architecture.
 
 ## 🚀 Overview
 

@@ -10,8 +10,8 @@ import "./DTPToken.sol";
 import "./interfaces/IDTPFactory.sol";
 import "./interfaces/IMFTRegistry.sol";
 import "./interfaces/IAppRegistry.sol";
-import {IBitcoinPodManager} from "@BitDSM/interfaces/IBitcoinPodManager.sol";
-import {IBitcoinPod} from "@BitDSM/interfaces/IBitcoinPod.sol";
+import {IBitcoinPodManager} from "@motif-contracts/core/BitcoinPodManager.sol";
+import {IBitcoinPod} from "@motif-contracts/interfaces/IBitcoinPod.sol";
 /**
  * @title DTPFactory
  * @notice Factory contract for creating new DTP tokens
