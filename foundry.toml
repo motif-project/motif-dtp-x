@@ -7,7 +7,7 @@ remappings = [
     "@openzeppelin/=lib/openzeppelin-contracts/",
     "@openzeppelin-upgradeable/=lib/openzeppelin-contracts-upgradeable/",
     "forge-std/=lib/forge-std/src/",
-    "@BitDSM/=lib/BitDSM/src/",
+    "@motif-contracts/=lib/motif-contracts/src/",
 ]
 
 gas_reports = ["*"]
