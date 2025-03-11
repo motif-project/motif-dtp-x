@@ -9,7 +9,7 @@ import {IAppRegistry} from "../src/interfaces/IAppRegistry.sol";
 
 contract DTPDeployScript is Script {
     address internal _APP_REGISTRY;
-    address internal _BIT_DSM_REGISTRY;
+    address internal _MOTIF_REGISTRY;
     address internal _BITCOIN_POD_MANAGER;
     
     DTPFactory public dtpFactory;
@@ -17,9 +17,9 @@ contract DTPDeployScript is Script {
     MFTRegistry public mftRegistry;
 
     function setUp() public {
-        _APP_REGISTRY = address(0x91677dD787cd9056c5805cBb74e271Fd83d88E61);
-        _BIT_DSM_REGISTRY = address(0xba3C98E3D60871f92d1c8890a13207fE46534641);
-        _BITCOIN_POD_MANAGER = address(0x96EAE70bC21925DdE05602c87c4483579205B1F6);
+        _APP_REGISTRY = address(0xe4FAb06cb45dE808894906146456c9f4D66Fad58);
+        _MOTIF_REGISTRY = address(0x83210B83d55fbCA44099972C358Bf8a4493352B1);
+        _BITCOIN_POD_MANAGER = address(0x033253C94884fdeB529857a66D06047384164525);
     }
 
     function run() public {
@@ -29,7 +29,7 @@ contract DTPDeployScript is Script {
         vm.startBroadcast(deployerPrivateKey);
         // delopy mtf registry
         mftRegistry = new MFTRegistry();
-        mftRegistry.initialize(_BIT_DSM_REGISTRY);
+        mftRegistry.initialize(_MOTIF_REGISTRY);
         // deploy dtp factory
         dtpFactory = new DTPFactory();
         dtpFactory.initialize(address(mftRegistry), _APP_REGISTRY, _BITCOIN_POD_MANAGER);
@@ -90,7 +90,7 @@ contract DTPDeployScript is Script {
         console.log("DTPFactory:", address(dtpFactory));
         console.log("MFTRegistry:", address(mftRegistry));
         dtpFactory.updateAppMetadataURI(
-            "https://raw.githubusercontent.com/usmanshahid86/test_avs_data/refs/heads/motif-app-data/avs_test.json"        );
+            "https://raw.githubusercontent.com/usmanshahid86/test_avs_data/f1f84beb513f99027dfd92b7d882341dc21447e3/avs_test.json");
         vm.stopBroadcast();
     }
 }

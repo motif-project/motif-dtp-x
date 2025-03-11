@@ -10,7 +10,7 @@ import "./DTPToken.sol";
 import "./interfaces/IDTPFactory.sol";
 import "./interfaces/IMFTRegistry.sol";
 import "./interfaces/IAppRegistry.sol";
-import {IBitcoinPodManager} from "@motif-contracts/core/BitcoinPodManager.sol";
+import {IBitcoinPodManager} from "@motif-contracts/interfaces/IBitcoinPodManager.sol";
 import {IBitcoinPod} from "@motif-contracts/interfaces/IBitcoinPod.sol";
 /**
  * @title DTPFactory

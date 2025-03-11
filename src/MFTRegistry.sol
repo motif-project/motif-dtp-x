@@ -27,8 +27,8 @@ contract MFTRegistry is
     // Array of all DTP tokens
     address[] public allDTPs;
 
-    // BitDSM registry address
-    address public bitDSMRegistry;
+    // Motif registry address
+    address public motifRegistry;
 
     event DTPCreated(
         address indexed dtp,
@@ -38,11 +38,11 @@ contract MFTRegistry is
         address operator
     );
 
-    function initialize(address _bitDSMRegistry) external initializer {
+    function initialize(address _motifRegistry) external initializer {
         __Ownable_init(msg.sender);
         __Pausable_init();
         __ReentrancyGuard_init();
-        bitDSMRegistry = _bitDSMRegistry;
+        motifRegistry = _motifRegistry;
     }
 
     function registerDTP(
